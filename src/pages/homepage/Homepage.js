@@ -1,18 +1,15 @@
 import React from "react";
 import "./Homepage.scss";
 import Directory from "../../components/directory/Directory";
+import ShopPage from "../shop-page/ShopPage";
 import { Switch, Route } from "react-router-dom";
-
-const HatPage = () => {
-  return <h1>Hat Page</h1>;
-};
 
 const Homepage = () => {
   return (
     <div className="homepage">
       <Switch>
         <Route exact path="/" component={Directory} />
-        <Route exact path="/shop/hats" component={HatPage} />
+        <Route exact path="/shop" component={ShopPage} />
       </Switch>
     </div>
   );
