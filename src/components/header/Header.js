@@ -8,35 +8,32 @@ import { connect } from "react-redux";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
-const Header = ({ currentUser, hidden }) => {
-  console.log(hidden);
-  return (
-    <div className="header">
-      <Link to="/" className="logo-container">
-        <Logo className="logo" />
+const Header = ({ currentUser, hidden }) => (
+  <div className="header">
+    <Link to="/" className="logo-container">
+      <Logo className="logo" />
+    </Link>
+    <div className="options">
+      <Link to="/shop" className="option">
+        SHOP
       </Link>
-      <div className="options">
-        <Link to="/shop" className="option">
-          SHOP
+      <Link to="/shop" className="option">
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className="option" onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className="option" to="/signin">
+          SIGN IN
         </Link>
-        <Link to="/shop" className="option">
-          CONTACT
-        </Link>
-        {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
-            SIGN OUT
-          </div>
-        ) : (
-          <Link className="option" to="/signin">
-            SIGN IN
-          </Link>
-        )}
-        <CartIcon />
-      </div>
-      {hidden ? null : <CartDropdown />}
+      )}
+      <CartIcon />
     </div>
-  );
-};
+    {hidden ? null : <CartDropdown />}
+  </div>
+);
 
 const mapStatetoProps = ({ user: { currentUser }, cart: { hidden } }) => ({
   currentUser,
